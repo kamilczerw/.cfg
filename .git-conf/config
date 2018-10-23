@@ -1,0 +1,5 @@
+[init]
+  templatedir = ~/.git-conf/.git-templates
+
+[include]
+  path = ~/.git-conf/git-aliases
