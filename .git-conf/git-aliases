@@ -1,26 +1,27 @@
 [alias]
-	ls = log --pretty=oneline -n 20 --graph --abbrev-commit
-	s = status -s
-	ci = commit
-	co = checkout
+  ls = log --pretty=oneline -n 20 --graph --abbrev-commit
+  s = status -s
+  ci = commit
+  co = checkout
 
-	# Show the diff between the latest commit and the current state
-	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+  # Show the diff between the latest commit and the current state
+  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
-	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+  # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
   # Push to current branch even if it does not exist
   pu = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
 
-	# Pull in remote changes for the current repository and all its submodules
-	p = !"git pull; git submodule foreach git pull origin master"
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
 
-	# Clone a repository including all submodules
-	c = clone --recursive
+  # Clone a repository including all submodules
+  c = clone --recursive
 
-	# Commit all changes
-	ca = !git add -A && git commit -av
+  # Commit all changes
+  ca = !git add -A && git commit -av
 
-	# Interactive rebase with the given number of latest commits
+  # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
+
