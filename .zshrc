@@ -32,3 +32,8 @@ fi
 
 # Docker
 alias doc=docker-compose
+
+###### DICE ######
+export PATH="${HOME}/work/dice/cmd/bin:${PATH}"
+
+#### DICE END ####
