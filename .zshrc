@@ -33,6 +33,10 @@ fi
 # Docker
 alias doc=docker-compose
 
+# Go
+export GOPATH=${HOME}/go
+export PATH="${GOPATH}/bin:${PATH}"
+
 ###### DICE ######
 export PATH="${HOME}/work/dice/cmd/bin:${PATH}"
 
