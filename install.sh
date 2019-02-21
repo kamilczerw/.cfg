@@ -17,7 +17,7 @@ git clone https://github.com/tmux-plugins/tmux-continuum $HOME/.tmux/plugins/tmu
 
 # Install oh my zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-chsh -s /bin/zsh
+sudo sed -i s#${HOME}:/bin/bash#${HOME}:/bin/zsh#g /etc/passwd
 
 # Checkout configuration
 REPO="https://github.com/kamilczerw/.cfg"
