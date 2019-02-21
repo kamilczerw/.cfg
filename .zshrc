@@ -41,3 +41,6 @@ export PATH="${GOPATH}/bin:${PATH}"
 export PATH="${HOME}/work/dice/cmd/bin:${PATH}"
 
 #### DICE END ####
+
+# Run tmux
+tmux
