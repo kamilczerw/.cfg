@@ -44,3 +44,5 @@ export PATH="${HOME}/work/dice/cmd/bin:${PATH}"
 
 # Run tmux
 tmux
+
+export PATH="$HOME/.jenv/shims:$PATH"

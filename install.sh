@@ -46,3 +46,13 @@ config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 $config checkout
 $config config --local status.showUntrackedFiles no
+
+# Setup git
+if ! git config user.email ; then
+  echo "Please set git email: "
+  read GIT_EMAIL
+
+  git config --global user.email "${GIT_EMAIL}"
+fi
+
+git config --global include.path "${HOME}/.git-conf/config"

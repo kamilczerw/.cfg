@@ -1,3 +1,6 @@
+[user]
+  name = Kamil Czerwiński
+
 [init]
   templatedir = ~/.git-conf/.git-templates
 
