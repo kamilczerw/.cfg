@@ -56,3 +56,8 @@ if ! git config user.email ; then
 fi
 
 git config --global include.path "${HOME}/.git-conf/config"
+
+# Install MacOS specific apps
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  brew cask install sequel-pro visual-studio-code clipy
+fi

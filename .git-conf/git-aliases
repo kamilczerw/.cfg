@@ -1,5 +1,5 @@
 [alias]
-  ls = log --pretty=oneline -n 20 --graph --abbrev-commit
+  ls = log --pretty=oneline --graph --abbrev-commit
   s = status -s
   ci = commit
   co = checkout

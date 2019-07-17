@@ -7,27 +7,27 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-for f in ~/.functions/*; do source $f; done
+for f in ${HOME}/.functions/*; do source $f; done
 
 alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 
-source ~/.git-conf/bash-aliases
+source ${HOME}/.git-conf/bash-aliases
 
 export PATH="${HOME}/bin:${PATH}"
 
 # Secrets
-if [ ! -f ~/.secrets ]; then
-  touch ~/.secrets
+if [ ! -f ${HOME}/.secrets ]; then
+  touch ${HOME}/.secrets
 fi
-source ~/.secrets
+source ${HOME}/.secrets
 
 export GIT_SSH_COMMAND="ssh -q"
 
 # 1password
 export OP_EMAIL="wojciech.kamil@gmail.com"
 if [ -z "$OP_SECRET_KEY" ]; then
-  echo "OP_SECRET_KEY is not set!\nAdd it to ~/.secrets"
-  echo "echo \"export OP_SECRET_KEY=A3-XXXXXX-XXXXXX-XXXXX-XXXXX-XXXXX-XXXXX\" >> ~/.secrets"
+  echo "OP_SECRET_KEY is not set!\nAdd it to ${HOME}/.secrets"
+  echo "echo \"export OP_SECRET_KEY=A3-XXXXXX-XXXXXX-XXXXX-XXXXX-XXXXX-XXXXX\" >> ${HOME}/.secrets"
 fi
 
 # Docker
@@ -45,4 +45,30 @@ export PATH="${HOME}/work/dice/cmd/bin:${PATH}"
 # Run tmux
 tmux
 
+# Java env
 export PATH="$HOME/.jenv/shims:$PATH"
+
+#### Profile ####
+if [ ! -f ${HOME}/.defaults ]; then
+  touch ${HOME}/.defaults
+fi
+
+source ${HOME}/.defaults
+
+set_profile_name() {
+  read profile
+  echo "export PROFILE=$profile" >> ${HOME}/.defaults
+  source ${HOME}/.defaults
+}
+
+if [ -z "$PROFILE" ]; then
+  echo "\nPROFILE is not set!\nAdd it to ${HOME}/.defaults"
+  echo "Do you want to set it now? [Y/n]"
+  read yn
+    case $yn in
+        [Yy]* ) set_profile_name ;;
+    esac
+else 
+  source ${HOME}/Dropbox/work/${profile}/.profile
+fi
+
