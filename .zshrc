@@ -1,6 +1,6 @@
 export ZSH="${HOME}/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="kamil"
 
 plugins=(
   git
@@ -37,11 +37,6 @@ alias doc=docker-compose
 export GOPATH=${HOME}/go
 export PATH="${GOPATH}/bin:${PATH}"
 
-###### DICE ######
-export PATH="${HOME}/work/dice/cmd/bin:${PATH}"
-
-#### DICE END ####
-
 # Run tmux
 tmux
 
@@ -69,6 +64,5 @@ if [ -z "$PROFILE" ]; then
         [Yy]* ) set_profile_name ;;
     esac
 else 
-  source ${HOME}/Dropbox/work/${profile}/.profile
+  source ${HOME}/Dropbox/work/${PROFILE}/.profile
 fi
-
