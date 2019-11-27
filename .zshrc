@@ -50,6 +50,7 @@ export PATH="$HOME/.jenv/shims:$PATH"
 alias k="kubectl"
 alias kn="kubens"
 alias kx="kubectx"
+alias kp="kubectl get pods -o wide"
 
 # Add kubernetes prompt
 source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
