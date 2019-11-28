@@ -16,8 +16,6 @@ alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 
 source ${HOME}/.git-conf/bash-aliases
 
-export PATH="${HOME}/bin:${PATH}"
-
 # Secrets
 if [ ! -f ${HOME}/.secrets ]; then
   touch ${HOME}/.secrets
@@ -50,7 +48,6 @@ export PATH="$HOME/.jenv/shims:$PATH"
 alias k="kubectl"
 alias kn="kubens"
 alias kx="kubectx"
-alias kp="kubectl get pods -o wide"
 
 # Add kubernetes prompt
 source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
@@ -82,4 +79,4 @@ fi
 
 alias aws-session=". ${HOME}/bin/aws-session-script"
 
-
+export PATH="${HOME}/bin:${PATH}"
