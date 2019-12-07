@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+filename="/tmp/wttr.status"
+
+ttl=60
+
+function last_modified {
+    echo $(( $(date "+%s") - $(date -r $filename "+%s") ))
+}
+
+if [ ! -f "$filename" ] || [ $(last_modified) -gt $ttl ]; then
+    curl -s https://wttr.in/Stockholm\?format\="%c%20%t&period=60" > $filename
+fi
+
+cat $filename

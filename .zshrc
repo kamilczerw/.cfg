@@ -4,6 +4,9 @@ ZSH_THEME="kamil"
 
 plugins=(
   git
+  docker
+  helm
+  kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -15,9 +18,6 @@ source ${HOME}/.git-conf/bash-aliases
 
 # Java env
 export PATH="$HOME/.jenv/shims:$PATH"
-
-# Home bin
-export PATH="${HOME}/bin:${PATH}"
 
 # Secrets
 if [ ! -f ${HOME}/.secrets ]; then
@@ -44,6 +44,14 @@ export PATH="${GOPATH}/bin:${PATH}"
 # Run tmux
 tmux
 
+#### Kubernetes ####
+alias k="kubectl"
+alias kn="kubens"
+alias kx="kubectx"
+
+# Add kubernetes prompt
+# source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+
 #### Profile ####
 if [ ! -f ${HOME}/.defaults ]; then
   touch ${HOME}/.defaults
@@ -67,3 +75,8 @@ if [ -z "$PROFILE" ]; then
 else 
   source ${HOME}/Dropbox/work/${PROFILE}/.profile
 fi
+
+
+alias aws-session=". ${HOME}/bin/aws-session-script"
+
+export PATH="${HOME}/bin:${PATH}"

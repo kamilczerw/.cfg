@@ -101,5 +101,14 @@ git_prompt () {
   echo $_result
 }
 
+
+kube_prompt () {
+  source $HOME/.zshrc
+  local context=$(kubectl config current-context)
+  local namespace=$(kubens --current)
+
+  echo "(⎈  #[fg=$(color red)]$context#[fg=$RESET_BORDER_COLOR]:#[fg=$(color cyan)]$namespace#[fg=$RESET_BORDER_COLOR])"
+}
+
 # final output
-echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)"
+echo "$(kube_prompt) $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)"
