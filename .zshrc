@@ -13,6 +13,10 @@ alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 
 source ${HOME}/.git-conf/bash-aliases
 
+# Java env
+export PATH="$HOME/.jenv/shims:$PATH"
+
+# Home bin
 export PATH="${HOME}/bin:${PATH}"
 
 # Secrets
@@ -39,9 +43,6 @@ export PATH="${GOPATH}/bin:${PATH}"
 
 # Run tmux
 tmux
-
-# Java env
-export PATH="$HOME/.jenv/shims:$PATH"
 
 #### Profile ####
 if [ ! -f ${HOME}/.defaults ]; then

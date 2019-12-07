@@ -14,19 +14,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Install 1password cli
-OP_VERSION=${OP_VERSION:-"v0.5.5"}
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    OP_NAME="op_linux_amd64_${OP_VERSION}.zip"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    OP_NAME="op_darwin_amd64_${OP_VERSION}.zip"
-fi
+OP_VERSION=${OP_VERSION:-"v0.8.0"}
+OP_NAME="op_darwin_amd64_${OP_VERSION}.pkg"
 pushd $TEMP_DIR
   curl -o $OP_NAME https://cache.agilebits.com/dist/1P/op/pkg/${OP_VERSION}/${OP_NAME}
-  unzip $OP_NAME -d $TEMP_DIR
-  gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
-  gpg --verify op.sig op
-
-  mv op /usr/local/bin/op
+  sudo installer -pkg $OP_NAME -target /
 popd
 
 # Install tmux-resurect
@@ -36,6 +28,7 @@ if [ ! -d $HOME/.tmux/plugins/tmux-continuum ]; then git clone https://github.co
 
 # # Install oh my zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh ; fi
+chsh -s /bin/zsh
 # sudo sed -i s#${HOME}:/bin/bash#${HOME}:/bin/zsh#g /etc/passwd
 
 # Checkout configuration
@@ -58,6 +51,6 @@ fi
 git config --global include.path "${HOME}/.git-conf/config"
 
 # Install MacOS specific apps
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
   brew cask install sequel-pro visual-studio-code clipy
 fi
