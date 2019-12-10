@@ -24,6 +24,11 @@ function get_key {
     CODE=$?
 
     if [[ $CODE != 0 ]]; then
+        MESSAGE=$(cat ${FIFO})
+        echo $MESSAGE
+        REGEX="ERROR\)\s*[Y]+"
+        if [[ $MESSAGE =~ $REGEX ]] ; then echo "error" 
+        fi
         case $(cat ${FIFO}) in
             *ERROR\)\ You\ are\ not\ currently\ signed\ in*) op_session
                 $GET_DOCUMENT_CMD &> ${FIFO}

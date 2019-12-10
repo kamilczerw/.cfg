@@ -10,8 +10,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-for f in ${HOME}/.functions/*; do source $f; done
-
 alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 
 source ${HOME}/.git-conf/bash-aliases
