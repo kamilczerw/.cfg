@@ -14,7 +14,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Install 1password cli
-OP_VERSION=${OP_VERSION:-"v0.8.0"}
+OP_VERSION=${OP_VERSION:-"v1.7.0"}
 OP_NAME="op_darwin_amd64_${OP_VERSION}.pkg"
 pushd $TEMP_DIR
   curl -o $OP_NAME https://cache.agilebits.com/dist/1P/op/pkg/${OP_VERSION}/${OP_NAME}
