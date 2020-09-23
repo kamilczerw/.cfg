@@ -8,6 +8,20 @@ To install config files run
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kamilczerw/.cfg/master/install.sh)"
 ```
 
+
+## Update configs
+
+After installation there is a `config` alias created to interact with this repo. It's basically a `git` alias, so all git commands work.
+
+
+***
+**NOTE**
+
+Don't use `config add .`, it will add all files from home directory to be tracked with git.
+
+***
+
+
 ## iTerm2 
 
 After installing iterm you need to set the directory form where it reads configuration. To do so, go to `Preferences` -> `General` -> `Preferences`, 
