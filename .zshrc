@@ -40,7 +40,15 @@ export GOPATH=${HOME}/go
 export PATH="${GOPATH}/bin:${PATH}"
 
 # Run tmux
-tmux
+if [[ -z $TMUX ]]; then
+  tmux list-sessions 2>&1 
+  if [[ $? != 0 ]]; then
+    tmux
+  else
+    tmux attach
+  fi
+  # tmux
+fi
 
 #### Kubernetes ####
 alias k="kubectl"
@@ -61,6 +69,7 @@ fi
 source ${HOME}/.defaults
 
 set_profile_name() {
+  echo "Set profile name: "
   read profile
   echo "export PROFILE=$profile" >> ${HOME}/.defaults
   source ${HOME}/.defaults
