@@ -15,7 +15,7 @@ alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 source ${HOME}/.git-conf/bash-aliases
 
 # Java env
-export PATH="$HOME/.jenv/shims:$PATH"
+eval "$(jenv init -)"
 
 # Secrets
 if [ ! -f ${HOME}/.secrets ]; then
