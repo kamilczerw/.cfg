@@ -31,6 +31,9 @@ if [ ! -d $HOME/.oh-my-zsh ]; then git clone https://github.com/robbyrussell/oh-
 chsh -s /bin/zsh
 # sudo sed -i s#${HOME}:/bin/bash#${HOME}:/bin/zsh#g /etc/passwd
 
+# TODO: Fetcho the ssh key from 1password
+# TODO: change REPO to git@github.com/kamilczerw/.cfg.git 
+
 # Checkout configuration
 REPO="https://github.com/kamilczerw/.cfg"
 
@@ -39,6 +42,8 @@ config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 $config checkout
 $config config --local status.showUntrackedFiles no
+$config config user.name "Kamil Czerwiński"
+$config config user.email "kam.czerwinski@gmail.com"
 
 # Setup git
 if ! git config user.email ; then
