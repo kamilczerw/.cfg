@@ -15,7 +15,8 @@ alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 source ${HOME}/.git-conf/bash-aliases
 
 # Java env
-export PATH="$HOME/.jenv/shims:$PATH"
+export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
+eval "$(jenv init -)"
 
 # Secrets
 if [ ! -f ${HOME}/.secrets ]; then
@@ -77,4 +78,15 @@ fi
 
 alias aws-session=". ${HOME}/bin/aws-session-script"
 
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
 export PATH="${HOME}/bin:${PATH}"
+
+# Add jump
+eval "$(jump shell)"
+
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH
+
+
