@@ -16,6 +16,7 @@ source ${HOME}/.git-conf/bash-aliases
 
 # Java env
 export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
+
 eval "$(jenv init -)"
 
 # Secrets
@@ -41,7 +42,15 @@ export GOPATH=${HOME}/go
 export PATH="${GOPATH}/bin:${PATH}"
 
 # Run tmux
-tmux
+if [[ -z $TMUX ]]; then
+  tmux list-sessions 2>&1 
+  if [[ $? != 0 ]]; then
+    tmux
+  else
+    tmux attach
+  fi
+  # tmux
+fi
 
 #### Kubernetes ####
 alias k="kubectl"
@@ -51,6 +60,9 @@ alias kx="kubectx"
 # Add kubernetes prompt
 # source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 
+# Add kubernetes local 
+export KUBECONFIG=~/.kube/config
+
 #### Profile ####
 if [ ! -f ${HOME}/.defaults ]; then
   touch ${HOME}/.defaults
@@ -59,6 +71,7 @@ fi
 source ${HOME}/.defaults
 
 set_profile_name() {
+  echo "Set profile name: "
   read profile
   echo "export PROFILE=$profile" >> ${HOME}/.defaults
   source ${HOME}/.defaults
@@ -75,8 +88,39 @@ else
   source ${HOME}/Dropbox/work/${PROFILE}/.profile
 fi
 
-
 alias aws-session=". ${HOME}/bin/aws-session-script"
+alias docker-login="$(aws-okta exec staging-admin -- aws ecr get-login --no-include-email --region eu-west-1)"
+# Ruby path
+export PATH="/usr/local/opt/ruby/bin:${HOME}/.gem/ruby/2.6.0/bin:$PATH"
+
+export PATH="${HOME}/bin:$HOME/.cargo/bin:${PATH}"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/Users/kczerwinski/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/kczerwinski/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/kczerwinski/opt/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/kczerwinski/opt/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/opt/gcloud/path.zsh.inc' ]; then . '/usr/local/opt/gcloud/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/opt/gcloud/completion.zsh.inc' ]; then . '/usr/local/opt/gcloud/completion.zsh.inc'; fi
+
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH
+
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -88,5 +132,3 @@ eval "$(jump shell)"
 
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
-
-

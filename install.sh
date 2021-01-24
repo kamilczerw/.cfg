@@ -10,11 +10,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt install -y zsh tmux
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install zsh tmux gpg jump
+  brew install zsh tmux gpg jump jenv
 fi
 
 # Install 1password cli
-OP_VERSION=${OP_VERSION:-"v0.8.0"}
+OP_VERSION=${OP_VERSION:-"v1.7.0"}
 OP_NAME="op_darwin_amd64_${OP_VERSION}.pkg"
 pushd $TEMP_DIR
   curl -o $OP_NAME https://cache.agilebits.com/dist/1P/op/pkg/${OP_VERSION}/${OP_NAME}
@@ -31,6 +31,9 @@ if [ ! -d $HOME/.oh-my-zsh ]; then git clone https://github.com/robbyrussell/oh-
 chsh -s /bin/zsh
 # sudo sed -i s#${HOME}:/bin/bash#${HOME}:/bin/zsh#g /etc/passwd
 
+# TODO: Fetcho the ssh key from 1password
+# TODO: change REPO to git@github.com/kamilczerw/.cfg.git 
+
 # Checkout configuration
 REPO="https://github.com/kamilczerw/.cfg"
 
@@ -39,6 +42,8 @@ config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 $config checkout
 $config config --local status.showUntrackedFiles no
+$config config user.name "Kamil Czerwiński"
+$config config user.email "kam.czerwinski@gmail.com"
 
 # Setup git
 if ! git config user.email ; then
