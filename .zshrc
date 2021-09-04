@@ -17,7 +17,7 @@ source ${HOME}/.git-conf/bash-aliases
 # Java env
 # export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
 
-eval "$(jenv init -)"
+# eval "$(jenv init -)"
 
 # Secrets
 # if [ ! -f ${HOME}/.secrets ]; then
