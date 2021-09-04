@@ -15,24 +15,24 @@ alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 source ${HOME}/.git-conf/bash-aliases
 
 # Java env
-export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
+# export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
 
 eval "$(jenv init -)"
 
 # Secrets
-if [ ! -f ${HOME}/.secrets ]; then
-  touch ${HOME}/.secrets
-fi
-source ${HOME}/.secrets
+# if [ ! -f ${HOME}/.secrets ]; then
+#   touch ${HOME}/.secrets
+# fi
+# source ${HOME}/.secrets
 
-export GIT_SSH_COMMAND="ssh -q"
+# export GIT_SSH_COMMAND="ssh -q"
 
-# 1password
-export OP_EMAIL="wojciech.kamil@gmail.com"
-if [ -z "$OP_SECRET_KEY" ]; then
-  echo "OP_SECRET_KEY is not set!\nAdd it to ${HOME}/.secrets"
-  echo "echo \"export OP_SECRET_KEY=A3-XXXXXX-XXXXXX-XXXXX-XXXXX-XXXXX-XXXXX\" >> ${HOME}/.secrets"
-fi
+# # 1password
+# export OP_EMAIL="wojciech.kamil@gmail.com"
+# if [ -z "$OP_SECRET_KEY" ]; then
+#   echo "OP_SECRET_KEY is not set!\nAdd it to ${HOME}/.secrets"
+#   echo "echo \"export OP_SECRET_KEY=A3-XXXXXX-XXXXXX-XXXXX-XXXXX-XXXXX-XXXXX\" >> ${HOME}/.secrets"
+# fi
 
 # Docker
 alias doc=docker-compose
@@ -64,32 +64,32 @@ alias kx="kubectx"
 export KUBECONFIG=~/.kube/config
 
 #### Profile ####
-if [ ! -f ${HOME}/.defaults ]; then
-  touch ${HOME}/.defaults
-fi
+# if [ ! -f ${HOME}/.defaults ]; then
+#   touch ${HOME}/.defaults
+# fi
 
-source ${HOME}/.defaults
+# source ${HOME}/.defaults
 
-set_profile_name() {
-  echo "Set profile name: "
-  read profile
-  echo "export PROFILE=$profile" >> ${HOME}/.defaults
-  source ${HOME}/.defaults
-}
+# set_profile_name() {
+#   echo "Set profile name: "
+#   read profile
+#   echo "export PROFILE=$profile" >> ${HOME}/.defaults
+#   source ${HOME}/.defaults
+# }
 
-if [ -z "$PROFILE" ]; then
-  echo "\nPROFILE is not set!\nAdd it to ${HOME}/.defaults"
-  echo "Do you want to set it now? [Y/n]"
-  read yn
-    case $yn in
-        [Yy]* ) set_profile_name ;;
-    esac
-else 
-  source ${HOME}/Dropbox/work/${PROFILE}/.profile
-fi
+# if [ -z "$PROFILE" ]; then
+#   echo "\nPROFILE is not set!\nAdd it to ${HOME}/.defaults"
+#   echo "Do you want to set it now? [Y/n]"
+#   read yn
+#     case $yn in
+#         [Yy]* ) set_profile_name ;;
+#     esac
+# else 
+#   source ${HOME}/Dropbox/work/${PROFILE}/.profile
+# fi
 
-alias aws-session=". ${HOME}/bin/aws-session-script"
-alias docker-login="$(aws-okta exec staging-admin -- aws ecr get-login --no-include-email --region eu-west-1)"
+# alias aws-session=". ${HOME}/bin/aws-session-script"
+# alias docker-login="$(aws-okta exec staging-admin -- aws ecr get-login --no-include-email --region eu-west-1)"
 # Ruby path
 export PATH="/usr/local/opt/ruby/bin:${HOME}/.gem/ruby/2.6.0/bin:$PATH"
 

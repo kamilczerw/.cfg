@@ -2,7 +2,7 @@
   name = Kamil Czerwiński
 
 [init]
-  templatedir = ~/.git-conf/.git-templates
+  ; templatedir = ~/.git-conf/.git-templates
 
 [core]
   excludesfile = ~/.gitignore_global
