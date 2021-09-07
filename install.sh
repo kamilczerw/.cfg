@@ -6,56 +6,44 @@ trap "rm -rf ${TEMP_DIR}" EXIT
 
 # Install zsh and tmux
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    sudo apt update
-    sudo apt install -y zsh tmux
+    # sudo apt update
+    # sudo apt install -y zsh tmux
+    sudo snap install go
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install zsh tmux gpg jump jenv
+  brew install zsh tmux gpg jenv go
 fi
 
-# Install 1password cli
-OP_VERSION=${OP_VERSION:-"v1.7.0"}
-OP_NAME="op_darwin_amd64_${OP_VERSION}.pkg"
-pushd $TEMP_DIR
-  curl -o $OP_NAME https://cache.agilebits.com/dist/1P/op/pkg/${OP_VERSION}/${OP_NAME}
-  sudo installer -pkg $OP_NAME -target /
-popd
-
-# Install tmux-resurect
-mkdir -p $HOME/.tmux/plugins
-if [ ! -d $HOME/.tmux/plugins/tmux-resurrect ]; then git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/.tmux/plugins/tmux-resurrect ; fi
-if [ ! -d $HOME/.tmux/plugins/tmux-continuum ]; then git clone https://github.com/tmux-plugins/tmux-continuum $HOME/.tmux/plugins/tmux-continuum ; fi
 
 # # Install oh my zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh ; fi
-chsh -s /bin/zsh
-# sudo sed -i s#${HOME}:/bin/bash#${HOME}:/bin/zsh#g /etc/passwd
-
-# TODO: Fetcho the ssh key from 1password
-# TODO: change REPO to git@github.com/kamilczerw/.cfg.git 
+if [ $SHELL != "/bin/zsh" ]; then chsh -s /bin/zsh ; fi
 
 # Checkout configuration
-REPO="https://github.com/kamilczerw/.cfg"
+if [ ! -d $HOME/.cfg ]; then
+  REPO="https://github.com/kamilczerw/.cfg"
 
-if [ ! -d $HOME/.cfg ]; then git clone --bare $REPO $HOME/.cfg ; fi
-config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+  if [ ! -d $HOME/.cfg ]; then git clone --bare $REPO $HOME/.cfg ; fi
+  config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
-$config checkout
-$config config --local status.showUntrackedFiles no
-$config config user.name "Kamil Czerwiński"
-$config config user.email "kam.czerwinski@gmail.com"
+  $config checkout
+  $config config --local status.showUntrackedFiles no
+  $config config user.name "Kamil Czerwiński"
+  $config config user.email "kam.czerwinski@gmail.com"
 
-# Setup git
-if ! git config user.email ; then
-  echo "Please set git email: "
-  read GIT_EMAIL
-
-  git config --global user.email "${GIT_EMAIL}"
+  git config --global include.path "${HOME}/.git-conf/config"
+else
+  echo ".cfg has already been initialized. Skipping"
 fi
-
-git config --global include.path "${HOME}/.git-conf/config"
 
 # Install MacOS specific apps
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  brew cask install sequel-pro visual-studio-code clipy
-fi
+# if [[ "$OSTYPE" == "darwin"* ]]; then
+  # brew cask install sequel-pro visual-studio-code clipy
+# fi
+
+# Install jump
+go get github.com/gsamokovarov/jump
+
+# Install Tmux Plugin Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+

@@ -9,10 +9,16 @@ plugins=(
   kubectl
 )
 
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+
 source $ZSH/oh-my-zsh.sh
 alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 
 source ${HOME}/.git-conf/bash-aliases
+
+# Local PATH
+export PATH="${HOME}/.local/bin:${PATH}"
 
 # Java env
 # export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
@@ -36,6 +42,7 @@ source ${HOME}/.git-conf/bash-aliases
 
 # Docker
 alias doc=docker-compose
+alias poc=podman-compose
 
 # Go
 export GOPATH=${HOME}/go
@@ -112,12 +119,6 @@ export PATH="${HOME}/bin:$HOME/.cargo/bin:${PATH}"
 # <<< conda initialize <<<
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/opt/gcloud/path.zsh.inc' ]; then . '/usr/local/opt/gcloud/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/opt/gcloud/completion.zsh.inc' ]; then . '/usr/local/opt/gcloud/completion.zsh.inc'; fi
-
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
 
@@ -132,3 +133,13 @@ eval "$(jump shell)"
 
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/gcloud/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/opt/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
+
+# fnm
+export PATH=/home/kamil/.fnm:$PATH
+eval "`fnm env`"
