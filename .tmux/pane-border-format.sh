@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 # color variables
 INACTIVE_BORDER_COLOR='#444444'
@@ -23,6 +23,8 @@ case $i in
     ;;
 esac
 done
+
+cat $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
 
 # replace full path to home directory with ~
 PRETTY_PATH=$(sed "s:^$HOME:~:" <<< $PANE_CURRENT_PATH)
@@ -111,4 +113,7 @@ kube_prompt () {
 }
 
 # final output
-echo "$(kube_prompt) $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)"
+# echo "$(kube_prompt) $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)"
+
+mkdir -p $HOME/.tmux/status.local/$PANE_CURRENT_PATH
+echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local

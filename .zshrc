@@ -21,15 +21,18 @@ source ${HOME}/.git-conf/bash-aliases
 export PATH="${HOME}/.local/bin:${PATH}"
 
 # Java env
-# export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
 
-# eval "$(jenv init -)"
+# Terraform env
+export PATH="$HOME/.tfenv/bin:$PATH"
+
+eval "$(jenv init -)"
 
 # Secrets
-# if [ ! -f ${HOME}/.secrets ]; then
-#   touch ${HOME}/.secrets
-# fi
-# source ${HOME}/.secrets
+if [ ! -f ${HOME}/.secrets ]; then
+  touch ${HOME}/.secrets
+fi
+source ${HOME}/.secrets
 
 # export GIT_SSH_COMMAND="ssh -q"
 
@@ -61,8 +64,10 @@ fi
 
 #### Kubernetes ####
 alias k="kubectl"
-alias kn="kubens"
-alias kx="kubectx"
+alias kn="kubectl ns"
+alias kx="kubectl ctx"
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Add kubernetes prompt
 # source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
@@ -70,63 +75,19 @@ alias kx="kubectx"
 # Add kubernetes local 
 export KUBECONFIG=~/.kube/config
 
-#### Profile ####
-# if [ ! -f ${HOME}/.defaults ]; then
-#   touch ${HOME}/.defaults
-# fi
 
-# source ${HOME}/.defaults
-
-# set_profile_name() {
-#   echo "Set profile name: "
-#   read profile
-#   echo "export PROFILE=$profile" >> ${HOME}/.defaults
-#   source ${HOME}/.defaults
-# }
-
-# if [ -z "$PROFILE" ]; then
-#   echo "\nPROFILE is not set!\nAdd it to ${HOME}/.defaults"
-#   echo "Do you want to set it now? [Y/n]"
-#   read yn
-#     case $yn in
-#         [Yy]* ) set_profile_name ;;
-#     esac
-# else 
-#   source ${HOME}/Dropbox/work/${PROFILE}/.profile
-# fi
-
-# alias aws-session=". ${HOME}/bin/aws-session-script"
-# alias docker-login="$(aws-okta exec staging-admin -- aws ecr get-login --no-include-email --region eu-west-1)"
 # Ruby path
 export PATH="/usr/local/opt/ruby/bin:${HOME}/.gem/ruby/2.6.0/bin:$PATH"
 
+# Cargo path
 export PATH="${HOME}/bin:$HOME/.cargo/bin:${PATH}"
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/kczerwinski/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/Users/kczerwinski/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/kczerwinski/opt/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/Users/kczerwinski/opt/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-
 
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
 
 
 # Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-
-export PATH="${HOME}/bin:${PATH}"
+source $HOME/.cargo/env
 
 # Add jump
 eval "$(jump shell)"
@@ -143,3 +104,6 @@ if [ -f '/opt/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/gcloud
 # fnm
 export PATH=/home/kamil/.fnm:$PATH
 eval "`fnm env`"
+
+# Company specific config
+source $HOME/.local/syb
