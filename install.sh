@@ -10,7 +10,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt install -y tmux kubectl
     sudo snap install go
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew install zsh tmux gpg jenv go kubectl
 fi
 
