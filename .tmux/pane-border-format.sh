@@ -117,3 +117,4 @@ kube_prompt () {
 
 mkdir -p $HOME/.tmux/status.local/$PANE_CURRENT_PATH
 echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
+# echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && starship prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local

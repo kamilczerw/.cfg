@@ -26,6 +26,9 @@ export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
 # Terraform env
 export PATH="$HOME/.tfenv/bin:$PATH"
 
+# Yarn PATH
+export PATH="${HOME}/.yarn/bin:$PATH"
+
 eval "$(jenv init -)"
 
 # Secrets
@@ -107,3 +110,9 @@ eval "`fnm env`"
 
 # Company specific config
 source $HOME/.local/syb
+
+# Android
+export PATH="${HOME}/Android/Sdk/tools/bin:${PATH}"
+
+[ -d "$HOME/Library/Android/sdk" ] && ANDROID_SDK=$HOME/Library/Android/sdk || ANDROID_SDK=$HOME/Android/Sdk
+echo "export ANDROID_SDK=$ANDROID_SDK" >> ~/`[[ $SHELL == *"zsh" ]] && echo '.zshenv' || echo '.bash_profile'`

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pushd $HOME >> /dev/null
+    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME/ $@
+popd >> /dev/null
