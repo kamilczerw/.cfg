@@ -105,14 +105,6 @@ if [ -f '/opt/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/gcloud/googl
 if [ -f '/opt/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
 
 # fnm
-export PATH=/home/kamil/.fnm:$PATH
-eval "`fnm env`"
+#export PATH=/home/kamil/.fnm:$PATH
+#eval "`fnm env`"
 
-# Company specific config
-source $HOME/.local/syb
-
-# Android
-export PATH="${HOME}/Android/Sdk/tools/bin:${PATH}"
-
-[ -d "$HOME/Library/Android/sdk" ] && ANDROID_SDK=$HOME/Library/Android/sdk || ANDROID_SDK=$HOME/Android/Sdk
-echo "export ANDROID_SDK=$ANDROID_SDK" >> ~/`[[ $SHELL == *"zsh" ]] && echo '.zshenv' || echo '.bash_profile'`
