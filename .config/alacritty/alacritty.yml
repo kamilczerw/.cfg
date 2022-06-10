@@ -3,3 +3,12 @@ window:
 
 font:
   size: 10 
+
+alt_send_esc: true 
+
+# This is a workaround for not sending proper signal when Option key is pressed on MacOS
+key_bindings:
+  - { key: Up,       mods: Alt,     chars: "\x1b[1;5A"                   }
+  - { key: Down,     mods: Alt,     chars: "\x1b[1;5B"                   }
+  - { key: Left,     mods: Alt,     chars: "\x1bb"                       }
+  - { key: Right,    mods: Alt,     chars: "\x1bf"                       }
