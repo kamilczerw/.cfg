@@ -1,11 +1,11 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 # color variables
-INACTIVE_BORDER_COLOR='#444444'
-ACTIVE_BORDER_COLOR='#00afff'
-RED='#d70000'
-YELLOW='#ffff00'
-GREEN='#5fff00'
+# INACTIVE_BORDER_COLOR='#444444'
+# ACTIVE_BORDER_COLOR='#00afff'
+# RED='#d70000'
+# YELLOW='#ffff00'
+# GREEN='#5fff00'
 
 # read args
 for i in "$@"
@@ -24,97 +24,101 @@ case $i in
 esac
 done
 
-cat $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
+# cat $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
 
-# replace full path to home directory with ~
-PRETTY_PATH=$(sed "s:^$HOME:~:" <<< $PANE_CURRENT_PATH)
+# # replace full path to home directory with ~
+# PRETTY_PATH=$(sed "s:^$HOME:~:" <<< $PANE_CURRENT_PATH)
 
-# calculate reset color
-RESET_BORDER_COLOR=$([ $PANE_ACTIVE -eq 1 ] && echo $ACTIVE_BORDER_COLOR || echo $INACTIVE_BORDER_COLOR)
+# # calculate reset color
+# RESET_BORDER_COLOR=$([ $PANE_ACTIVE -eq 1 ] && echo $ACTIVE_BORDER_COLOR || echo $INACTIVE_BORDER_COLOR)
 
-color () {
-  INTENT=$1
-  echo $([ $PANE_ACTIVE -eq 1 ] && echo $INTENT || echo $INACTIVE_BORDER_COLOR)
-}
+# color () {
+#   INTENT=$1
+#   echo $([ $PANE_ACTIVE -eq 1 ] && echo $INTENT || echo $INACTIVE_BORDER_COLOR)
+# }
 
-# git functions adapted from the bureau zsh theme
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/bureau.zsh-theme
+# # git functions adapted from the bureau zsh theme
+# # https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/bureau.zsh-theme
 
-ZSH_THEME_GIT_PROMPT_PREFIX="("
-ZSH_THEME_GIT_PROMPT_SUFFIX=") "
-ZSH_THEME_GIT_PROMPT_CLEAN="#[fg=$(color $GREEN)]✓#[fg=$RESET_BORDER_COLOR]"
-ZSH_THEME_GIT_PROMPT_AHEAD="↑"
-ZSH_THEME_GIT_PROMPT_BEHIND="↓"
-ZSH_THEME_GIT_PROMPT_STAGED="#[fg=$(color $GREEN)]●#[fg=$RESET_BORDER_COLOR]"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="#[fg=$(color $YELLOW)]●#[fg=$RESET_BORDER_COLOR]"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="#[fg=$(color $RED)]●#[fg=$RESET_BORDER_COLOR]"
+# ZSH_THEME_GIT_PROMPT_PREFIX="("
+# ZSH_THEME_GIT_PROMPT_SUFFIX=") "
+# ZSH_THEME_GIT_PROMPT_CLEAN="#[fg=$(color $GREEN)]✓#[fg=$RESET_BORDER_COLOR]"
+# ZSH_THEME_GIT_PROMPT_AHEAD="↑"
+# ZSH_THEME_GIT_PROMPT_BEHIND="↓"
+# ZSH_THEME_GIT_PROMPT_STAGED="#[fg=$(color $GREEN)]●#[fg=$RESET_BORDER_COLOR]"
+# ZSH_THEME_GIT_PROMPT_UNSTAGED="#[fg=$(color $YELLOW)]●#[fg=$RESET_BORDER_COLOR]"
+# ZSH_THEME_GIT_PROMPT_UNTRACKED="#[fg=$(color $RED)]●#[fg=$RESET_BORDER_COLOR]"
 
-git_branch () {
-  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-  echo "${ref#refs/heads/}"
-}
+# git_branch () {
+#   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+#   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+#   echo "${ref#refs/heads/}"
+# }
 
-git_status () {
-  _STATUS=""
+# git_status () {
+#   _STATUS=""
 
-  # check status of files
-  _INDEX=$(command git status --porcelain 2> /dev/null)
-  if [[ -n "$_INDEX" ]]; then
-    if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
-      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STAGED"
-    fi
-    if $(echo "$_INDEX" | command grep -q '^.[MTD] '); then
-      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNSTAGED"
-    fi
-    if $(echo "$_INDEX" | command grep -q -E '^\?\? '); then
-      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED"
-    fi
-    if $(echo "$_INDEX" | command grep -q '^UU '); then
-      _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNMERGED"
-    fi
-  else
-    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
-  fi
+#   # check status of files
+#   _INDEX=$(command git status --porcelain 2> /dev/null)
+#   if [[ -n "$_INDEX" ]]; then
+#     if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
+#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STAGED"
+#     fi
+#     if $(echo "$_INDEX" | command grep -q '^.[MTD] '); then
+#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNSTAGED"
+#     fi
+#     if $(echo "$_INDEX" | command grep -q -E '^\?\? '); then
+#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED"
+#     fi
+#     if $(echo "$_INDEX" | command grep -q '^UU '); then
+#       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNMERGED"
+#     fi
+#   else
+#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+#   fi
 
-  # check status of local repository
-  _INDEX=$(command git status --porcelain -b 2> /dev/null)
-  if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
-    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_AHEAD"
-  fi
-  if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
-    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_BEHIND"
-  fi
+#   # check status of local repository
+#   _INDEX=$(command git status --porcelain -b 2> /dev/null)
+#   if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
+#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_AHEAD"
+#   fi
+#   if $(echo "$_INDEX" | command grep -q '^## .*behind'); then
+#     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_BEHIND"
+#   fi
 
-  echo $_STATUS
-}
+#   echo $_STATUS
+# }
 
-git_prompt () {
-  local _branch=$(git_branch)
-  local _status=$(git_status)
-  local _result=""
-  if [[ "${_branch}x" != "x" ]]; then
-    _result="git:$ZSH_THEME_GIT_PROMPT_PREFIX$_branch"
-    if [[ "${_status}x" != "x" ]]; then
-      _result="$_result $_status"
-    fi
-    _result="$_result$ZSH_THEME_GIT_PROMPT_SUFFIX"
-  fi
-  echo $_result
-}
+# git_prompt () {
+#   local _branch=$(git_branch)
+#   local _status=$(git_status)
+#   local _result=""
+#   if [[ "${_branch}x" != "x" ]]; then
+#     _result="git:$ZSH_THEME_GIT_PROMPT_PREFIX$_branch"
+#     if [[ "${_status}x" != "x" ]]; then
+#       _result="$_result $_status"
+#     fi
+#     _result="$_result$ZSH_THEME_GIT_PROMPT_SUFFIX"
+#   fi
+#   echo $_result
+# }
 
 
-kube_prompt () {
-  source $HOME/.zshrc
-  local context=$(kubectl config current-context)
-  local namespace=$(kubens --current)
+# kube_prompt () {
+#   source $HOME/.zshrc
+#   local context=$(kubectl config current-context)
+#   local namespace=$(kubens --current)
 
-  echo "(⎈  #[fg=$(color red)]$context#[fg=$RESET_BORDER_COLOR]:#[fg=$(color cyan)]$namespace#[fg=$RESET_BORDER_COLOR])"
-}
+#   echo "(⎈  #[fg=$(color red)]$context#[fg=$RESET_BORDER_COLOR]:#[fg=$(color cyan)]$namespace#[fg=$RESET_BORDER_COLOR])"
+# }
 
-# final output
-# echo "$(kube_prompt) $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)"
+# # final output
+# # echo "$(kube_prompt) $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)"
 
 mkdir -p $HOME/.tmux/status.local/$PANE_CURRENT_PATH
-echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
-# echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && starship prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
+# # echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
+
+echo " $(cd $PANE_CURRENT_PATH && starship prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
+# # echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && starship prompt)" > $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
+
+cat $HOME/.tmux/status.local/$PANE_CURRENT_PATH/status.$PANE_ACTIVE.local
