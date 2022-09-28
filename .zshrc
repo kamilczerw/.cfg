@@ -7,6 +7,8 @@ plugins=(
   docker
   helm
   kubectl
+  fzf-zsh-plugin
+  zsh-autosuggestions
 )
 
 bindkey "^P" up-line-or-search
@@ -54,21 +56,11 @@ alias poc=podman-compose
 export GOPATH=${HOME}/go
 export PATH="${GOPATH}/bin:${PATH}"
 
-# Run tmux
-if [[ -z $TMUX ]]; then
-  tmux list-sessions 2>&1 
-  if [[ $? != 0 ]]; then
-    tmux
-  else
-    tmux attach
-  fi
-  # tmux
-fi
-
 #### Kubernetes ####
 alias k="kubectl"
 alias kn="kubectl ns"
 alias kx="kubectl ctx"
+alias stern="kubectl stern"
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -76,7 +68,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 
 # Add kubernetes local 
-export KUBECONFIG=~/.kube/config
+export KUBECONFIG=~/.kube/config:~/.kube/homeserver
 
 
 # Ruby path
