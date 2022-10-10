@@ -67,6 +67,8 @@ source ${HOME}/.git-conf/bash-aliases
 # Local PATH
 export PATH="${HOME}/.local/bin:${PATH}"
 
+# Brew PATH
+export PATH="${PATH}:/opt/homebrew/bin"
 # Java env
 export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
 
