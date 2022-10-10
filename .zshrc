@@ -113,7 +113,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 
 # Add kubernetes local 
-export KUBECONFIG=~/.kube/config:~/.kube/homeserver
+export KUBECONFIG=~/.kube/config:~/.kube/homeserver:~/.kube/home-tmp
 
 
 # Ruby path

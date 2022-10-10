@@ -1,0 +1,14 @@
+add_newline = false
+
+[character]
+disabled = true
+
+[directory]
+truncate_to_repo = false
+truncation_symbol = "~/"
+
+[kubernetes]
+disabled = false
+
+[kubernetes.context_aliases]
+"arn:aws:.*:cluster/(?P<cluster_name>.*)" = "AWS: $cluster_name"
