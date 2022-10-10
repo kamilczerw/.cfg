@@ -16,8 +16,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 
-# # Install oh my zsh
-if [ ! -d $HOME/.oh-my-zsh ]; then git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh ; fi
+# Install zgenom
+if [ ! -d $HOME/.zgenom ]; then git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom" ; fi
+
 if [ $SHELL != "/bin/zsh" ]; then chsh -s /bin/zsh ; fi
 
 # Checkout configuration
