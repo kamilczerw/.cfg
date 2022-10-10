@@ -30,7 +30,7 @@ wezterm.on("update-right-status", function(window, pane)
   end
 
 
-  local success, sharship_status, err = wezterm.run_child_process({"sh", "/Users/kamilczerwinski/.wezterm/status.sh", path})
+  local success, sharship_status, err = wezterm.run_child_process({"sh", string.format("%s/.wezterm/status.sh", os.getenv("HOME")), path})
 
 
   local status = wezterm.format({
