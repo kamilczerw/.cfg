@@ -65,3 +65,15 @@ if [ ! -d $HOME/.tfenv ]; then
 else
   echo "tfenv has already been installed. Skipping"
 fi
+
+SSH_CONF_DIR=$HOME/.ssh/config.d/
+
+if [ ! -f $SSH_CONF_DIR/local ]; then
+  [ -d $SSH_CONF_DIR ] || mkdir $SSH_CONF_DIR/
+
+  echo "Host github.com
+  User git
+  IdentityFile ~/.ssh/keys/github.key" > $SSH_CONF_DIR/local
+
+  echo "!!! Remember to create ~/.ssh/keys/github.key"
+fi
