@@ -2,14 +2,59 @@ export ZSH="${HOME}/.oh-my-zsh"
 
 ZSH_THEME="kamil"
 
-plugins=(
-  git
-  docker
-  helm
-  kubectl
-  fzf-zsh-plugin
-  zsh-autosuggestions
-)
+# load zgenom
+source "${HOME}/.zgenom/zgenom.zsh"
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
+
+if ! zgenom saved; then
+  echo "Creating a zgenom save"
+
+  # Add this if you experience issues with missing completions or errors mentioning compdef.
+  # zgenom compdef
+
+  # Ohmyzsh base library
+  zgenom ohmyzsh
+
+  zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/sudo
+  
+  [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
+  
+#   zgenom ohmyzsh plugins/docker
+#   zgenom ohmyzsh plugins/helm
+#   zgenom ohmyzsh plugins/kubectl
+  zgenom load unixorn/fzf-zsh-plugin
+#   zgenom ohmyzsh plugins/helm
+
+  zgenom load zsh-users/zsh-syntax-highlighting
+  
+  antigen bundle zsh-users/zsh-autosuggestions
+  
+  # save all to init script
+  zgenom save
+
+  # Compile your zsh files
+  zgenom compile "$HOME/.zshrc"
+  zgenom compile $ZDOTDIR
+
+  # You can perform other "time consuming" maintenance tasks here as well.
+  # If you use `zgenom autoupdate` you're making sure it gets
+  # executed every 7 days.
+
+  # rbenv rehash
+fi
+
+# plugins=(
+#   git
+#   docker
+#   helm
+#   kubectl
+#   fzf-zsh-plugin
+#   zsh-autosuggestions
+# )
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
