@@ -31,8 +31,6 @@ if ! zgenom saved; then
 
   zgenom load zsh-users/zsh-syntax-highlighting
   
-  antigen bundle zsh-users/zsh-autosuggestions
-  
   # save all to init script
   zgenom save
 
@@ -129,7 +127,7 @@ export PATH=$N_PREFIX/bin:$PATH
 
 
 # Rust
-source $HOME/.cargo/env
+if [ -f '/opt/gcloud/google-cloud-sdk/path.zsh.inc' ]; then source $HOME/.cargo/env; fi
 
 # Add jump
 eval "$(jump shell)"
