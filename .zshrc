@@ -2,49 +2,6 @@ export ZSH="${HOME}/.oh-my-zsh"
 
 ZSH_THEME="kamil"
 
-# load zgenom
-source "${HOME}/.zgenom/zgenom.zsh"
-
-# Check for plugin and zgenom updates every 7 days
-# This does not increase the startup time.
-zgenom autoupdate
-
-if ! zgenom saved; then
-  echo "Creating a zgenom save"
-
-  # Add this if you experience issues with missing completions or errors mentioning compdef.
-  # zgenom compdef
-
-  # Ohmyzsh base library
-  zgenom ohmyzsh
-
-  zgenom ohmyzsh plugins/git
-  zgenom ohmyzsh plugins/sudo
-  
-  [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
-  
-#   zgenom ohmyzsh plugins/docker
-#   zgenom ohmyzsh plugins/helm
-#   zgenom ohmyzsh plugins/kubectl
-  zgenom load unixorn/fzf-zsh-plugin
-#   zgenom ohmyzsh plugins/helm
-
-  zgenom load zsh-users/zsh-syntax-highlighting
-  
-  # save all to init script
-  zgenom save
-
-  # Compile your zsh files
-  zgenom compile "$HOME/.zshrc"
-  zgenom compile $ZDOTDIR
-
-  # You can perform other "time consuming" maintenance tasks here as well.
-  # If you use `zgenom autoupdate` you're making sure it gets
-  # executed every 7 days.
-
-  # rbenv rehash
-fi
-
 # plugins=(
 #   git
 #   docker
@@ -113,7 +70,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
 
 # Add kubernetes local 
-export KUBECONFIG=~/.kube/config:~/.kube/homeserver:~/.kube/home-tmp
+export KUBECONFIG=~/.kube/config:~/.kube/home-tmp:~/.kube/kamhome
 
 
 # Ruby path
@@ -145,3 +102,48 @@ if [ -f '/opt/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/gcloud
 #export PATH=/home/kamil/.fnm:$PATH
 #eval "`fnm env`"
 
+# load zgenom
+source "${HOME}/.zgenom/zgenom.zsh"
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
+
+if ! zgenom saved; then
+  echo "Creating a zgenom save"
+
+  # Add this if you experience issues with missing completions or errors mentioning compdef.
+  # zgenom compdef
+
+  # Ohmyzsh base library
+  zgenom ohmyzsh
+
+  zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/sudo
+  
+  [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
+  
+#   zgenom ohmyzsh plugins/docker
+#   zgenom ohmyzsh plugins/helm
+#   zgenom ohmyzsh plugins/kubectl
+  # zgenom load unixorn/fzf-zsh-plugin
+#   zgenom ohmyzsh plugins/helm
+
+  zgenom load zsh-users/zsh-syntax-highlighting
+  zgenom load zsh-users/zsh-autosuggestions
+  
+  zgenom load unixorn/fzf-zsh-plugin
+
+  # save all to init script
+  zgenom save
+
+  # Compile your zsh files
+  zgenom compile "$HOME/.zshrc"
+  # zgenom compile $ZDOTDIR
+
+  # You can perform other "time consuming" maintenance tasks here as well.
+  # If you use `zgenom autoupdate` you're making sure it gets
+  # executed every 7 days.
+
+  # rbenv rehash
+fi
