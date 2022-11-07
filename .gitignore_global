@@ -1,0 +1,7 @@
+.java-version
+.local/
+.vemo
+.vemo.toml
+*.local
+*.local.*
+.DS_Store
