@@ -10,7 +10,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     
     sudo apt install -y zsh jq fzf 
 
-    snap install yq jump
+    sudo snap install yq jump
 
     sudo snap install kubectl --classic
     sudo snap install go --classic
