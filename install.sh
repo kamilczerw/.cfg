@@ -7,8 +7,14 @@ trap "rm -rf ${TEMP_DIR}" EXIT
 # Install zsh and tmux
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt update
-    sudo apt install -y tmux kubectl
-    sudo snap install go
+    
+    sudo apt install -y zsh yq fzf 
+
+    snap install yq jump
+
+    sudo snap install kubectl --classic
+    sudo snap install go --classic
+
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$PATH:/opt/homebrew/bin"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
