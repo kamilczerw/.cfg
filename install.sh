@@ -6,11 +6,14 @@ trap "rm -rf ${TEMP_DIR}" EXIT
 
 # Install zsh and tmux
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    echo "Updating apt"
     sudo apt update
     
+    echo "Installing packages"
     sudo apt install -y zsh jq fzf 
 
-    sudo snap install yq jump
+    sudo snap install yq 
+    sudo snap install jump
 
     sudo snap install kubectl --classic
     sudo snap install go --classic
