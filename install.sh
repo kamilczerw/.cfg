@@ -28,7 +28,10 @@ fi
 # Install zgenom
 if [ ! -d $HOME/.zgenom ]; then git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom" ; fi
 
-if [ $SHELL != "/bin/zsh" ]; then chsh -s /bin/zsh ; fi
+if [ $SHELL != "/bin/zsh" ]; then 
+  echo "Setting zsh as a default terminal"
+  chsh -s /bin/zsh
+fi
 
 # Checkout configuration
 if [ ! -d $HOME/.cfg ]; then
