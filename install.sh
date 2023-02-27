@@ -29,6 +29,7 @@ if [ $SHELL != "/bin/zsh" ]; then chsh -s /bin/zsh ; fi
 
 # Checkout configuration
 if [ ! -d $HOME/.cfg ]; then
+  echo "Setting up .cfg repo"
   REPO="https://github.com/kamilczerw/.cfg"
 
   if [ ! -d $HOME/.cfg ]; then git clone --bare $REPO $HOME/.cfg ; fi
