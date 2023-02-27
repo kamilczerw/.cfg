@@ -8,7 +8,7 @@ trap "rm -rf ${TEMP_DIR}" EXIT
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt update
     
-    sudo apt install -y zsh yq fzf 
+    sudo apt install -y zsh jq fzf 
 
     snap install yq jump
 
