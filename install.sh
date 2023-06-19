@@ -24,6 +24,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   brew install zsh gpg jenv go kubectl yq jq fzf jump
 fi
 
+# Install Oh My Zsh
+if [ ! -d $HOME/.oh-my-zsh ]; then
+    echo "Installing Oh My Zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 # Install zgenom
 if [ ! -d $HOME/.zgenom ]; then git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom" ; fi
