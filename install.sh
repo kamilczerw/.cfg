@@ -38,6 +38,10 @@ if [ $SHELL != "/bin/zsh" ]; then
   chsh -s /bin/zsh
 fi
 
+# Install starship.rs
+curl -sS https://starship.rs/install.sh | sh
+
+
 # Checkout configuration
 if [ ! -d $HOME/.cfg ]; then
   echo "Setting up .cfg repo"
