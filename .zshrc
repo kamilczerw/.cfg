@@ -25,7 +25,7 @@ export PATH="${HOME}/.local/bin:${PATH}"
 # Brew PATH
 export PATH="${PATH}:/opt/homebrew/bin"
 # Java env
-export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
+# export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
 
 # Terraform env
 export PATH="$HOME/.tfenv/bin:$PATH"
@@ -33,7 +33,7 @@ export PATH="$HOME/.tfenv/bin:$PATH"
 # Yarn PATH
 export PATH="${HOME}/.yarn/bin:$PATH"
 
-eval "$(jenv init -)"
+# eval "$(jenv init -)"
 
 # Secrets
 if [ ! -f ${HOME}/.secrets ]; then

@@ -1,6 +1,7 @@
 [user]
   name = Kamil Czerwiński
-
+  email = kamil@czerwinski.dev
+  
 [init]
   ; templatedir = ~/.git-conf/.git-templates
 
@@ -12,6 +13,9 @@
 
 [commit]
   gpgsign = true
+
+[pull]
+  rebase = true
 
 [gpg]
   program = gpg
