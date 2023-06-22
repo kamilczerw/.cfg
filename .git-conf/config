@@ -9,3 +9,13 @@
 
 [include]
   path = ~/.git-conf/git-aliases
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  program = gpg
+
+[includeIf "gitdir:~/work/embark/"]
+  path = ~/.git-conf/overrides/gitconfig_embark
+
