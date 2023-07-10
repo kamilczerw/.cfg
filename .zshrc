@@ -19,20 +19,6 @@ alias config="/usr/bin/git --git-dir=${HOME}/.cfg/ --work-tree=${HOME}"
 
 source ${HOME}/.git-conf/bash-aliases
 
-# Local PATH
-export PATH="${HOME}/.local/bin:${PATH}"
-
-# Brew PATH
-export PATH="${PATH}:/opt/homebrew/bin"
-# Java env
-# export PATH="$HOME/.jenv/bin:/usr/local/sbin:$PATH"
-
-# Terraform env
-export PATH="$HOME/.tfenv/bin:$PATH"
-
-# Yarn PATH
-export PATH="${HOME}/.yarn/bin:$PATH"
-
 # eval "$(jenv init -)"
 
 # Secrets
@@ -53,10 +39,6 @@ source ${HOME}/.secrets
 # Docker
 alias doc=docker-compose
 alias poc=podman-compose
-
-# Go
-export GOPATH=${HOME}/go
-export PATH="${GOPATH}/bin:${PATH}"
 
 #### Kubernetes ####
 alias k="kubectl"
@@ -147,3 +129,7 @@ if ! zgenom saved; then
 
   # rbenv rehash
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
