@@ -2,6 +2,8 @@ export ZSH="${HOME}/.oh-my-zsh"
 
 ZSH_THEME="kamil"
 
+zmodload zsh/zprof
+
 # plugins=(
 #   git
 #   docker
@@ -84,6 +86,12 @@ if [ -f '/opt/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/gcloud
 #export PATH=/home/kamil/.fnm:$PATH
 #eval "`fnm env`"
 
+# This is used to load nvm lazily by zsh-nvm plugin
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+
+export NVM_DIR="$HOME/.nvm"
+
 # load zgenom
 source "${HOME}/.zgenom/zgenom.zsh"
 
@@ -102,6 +110,7 @@ if ! zgenom saved; then
 
   zgenom ohmyzsh plugins/git
   zgenom ohmyzsh plugins/sudo
+  # zgenom ohmyzsh plugins/zsh-nvm
   
   [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
   
@@ -130,6 +139,5 @@ if ! zgenom saved; then
   # rbenv rehash
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
