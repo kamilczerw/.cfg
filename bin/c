@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
-
 pushd $HOME >>/dev/null
 /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME/ "$@"
 popd >>/dev/null
