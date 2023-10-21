@@ -76,12 +76,6 @@ eval "$(jump shell)"
 export N_PREFIX=$HOME/.n
 export PATH=$N_PREFIX/bin:$PATH
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/opt/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/gcloud/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/opt/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
-
 # fnm
 #export PATH=/home/kamil/.fnm:$PATH
 #eval "`fnm env`"
@@ -139,5 +133,7 @@ if ! zgenom saved; then
   # rbenv rehash
 fi
 
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/nomad nomad
+
+complete -o nospace -C /Users/kamilczerwinski/go/bin/nomad-pack nomad-pack
