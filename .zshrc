@@ -83,6 +83,7 @@ export PATH=$N_PREFIX/bin:$PATH
 # This is used to load nvm lazily by zsh-nvm plugin
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 
 export NVM_DIR="$HOME/.nvm"
 
@@ -119,6 +120,8 @@ if ! zgenom saved; then
   
   zgenom load unixorn/fzf-zsh-plugin
 
+  zgenom load lukechilds/zsh-nvm
+
   # save all to init script
   zgenom save
 
@@ -137,3 +140,9 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/nomad nomad
 
 complete -o nospace -C /Users/kamilczerwinski/go/bin/nomad-pack nomad-pack
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/kamil/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kamil/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/kamil/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kamil/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
